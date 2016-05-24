@@ -1,0 +1,27 @@
+{
+  "name": "poolwidget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-material": "http://github.com/angular/bower-material/tarball/v1.1.0-rc4",
+    "angular-messages": "^1.5.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mv740/poolWidget.git"
+  },
+  "author": "Michal Wozniak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mv740/poolWidget/issues"
+  },
+  "homepage": "https://github.com/mv740/poolWidget#readme"
+}

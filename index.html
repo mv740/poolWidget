@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <!--Material CSS -->
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+
+</head>
+<body ng-app="app">
+
+<div ng-controller="MainController as vm">
+    <md-toolbar class="md-extra-tall"></md-toolbar>
+    <div layout="row" layout-align="center center">
+        <div layout="row" class="md-whiteframe-3dp layout-padding-md" style="max-width: 300px; margin-top: 25px; background: white">
+            <div>
+
+                <h1>{{vm.temp1}}</h1>
+            </div>
+            <div>
+                <h1>{{vm.temp2}}</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Angular Material Dependencies -->
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-animate/angular-animate.js"></script>
+<script src="node_modules/angular-aria/angular-aria.js"></script>
+
+<!-- Material -->
+<script src="node_modules/angular-material/angular-material.js"></script>
+
+<script type="text/javascript">
+
+
+    angular
+            .module('app', ['ngMaterial'])
+            .controller('MainController', MainController);
+
+    MainController.$inject = ['$http','$interval'];
+
+    function MainController($http,$interval) {
+
+        var vm = this;
+
+        vm.temp1 = null;
+        vm.temp2 = null;
+
+        function successCallback(response) {
+            console.log(response);
+            var value = response.data.result.toFixed(2);
+            vm.temp1 = value;
+            toFahrenheit(value);
+        }
+
+        function errorCallback(response) {
+            console.log(response);
+        }
+
+        $interval(function() {
+            $http.get('https://api.particle.io/v1/devices/280021000547343339373536/temp?access_token=75e7ca7903e00b0a80f56bfd611026e594b53c02')
+                    .then(successCallback, errorCallback);
+        }, 1000);
+
+        function toFahrenheit(value) {
+            vm.temp2 = (value * 1.8 + 32).toFixed(2);
+        }
+    }
+
+</script>
+
+</body>
+</html>
